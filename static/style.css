@@ -1,6 +1,6 @@
 /* General Body Styles */
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #F5F5F5;
@@ -11,30 +11,29 @@ body {
     min-height: 100vh;
 }
 
-/* Header Styles */
-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 1.5rem 2rem;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-header h1 {
-    margin: 0;
-    font-size: 2.5rem;
-    font-weight: bold;
-}
-
-/* Main Content Area */
-main {
-    flex: 1;
+/* Styles for the main content container */
+.container {
     padding: 2rem;
     max-width: 800px;
     margin: 2rem auto;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Styles */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    /* Removed box-shadow as .container provides main shadow */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: bold;
 }
 
 /* Form Styling */
@@ -49,34 +48,35 @@ form#add-expense-form {
     background-color: #f9f9f9;
 }
 
-form#add-expense-form div {
+form#add-expense-form div.form-group {
     display: flex;
     flex-direction: column;
 }
 
-form label {
+form#add-expense-form label {
     margin-bottom: 0.5rem;
     font-weight: bold;
     color: #555;
 }
 
-form input[type="text"],
-form input[type="number"] {
+form#add-expense-form input[type="text"],
+form#add-expense-form input[type="number"] {
     padding: 0.75rem;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
+    font-family: 'Roboto', Arial, sans-serif;
     transition: border-color 0.3s ease;
 }
 
-form input[type="text"]:focus,
-form input[type="number"]:focus {
+form#add-expense-form input[type="text"]:focus,
+form#add-expense-form input[type="number"]:focus {
     border-color: #4CAF50;
     outline: none;
     box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
 }
 
-form button[type="submit"] {
+form#add-expense-form button.btn-add {
     background-color: #4CAF50;
     color: white;
     padding: 0.75rem 1.5rem;
@@ -84,11 +84,15 @@ form button[type="submit"] {
     border-radius: 4px;
     cursor: pointer;
     font-size: 1.1rem;
+    font-family: 'Roboto', Arial, sans-serif;
     transition: background-color 0.3s ease, transform 0.2s ease;
     align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem; /* Space for icon */
 }
 
-form button[type="submit"]:hover {
+form#add-expense-form button.btn-add:hover {
     background-color: #45a049;
     transform: translateY(-2px);
 }
@@ -102,13 +106,13 @@ section#expense-list h2 {
     font-size: 1.8rem;
 }
 
-section#expense-list ul {
+section#expense-list ul.expense-list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-section#expense-list li {
+section#expense-list li.expense-item {
     background-color: #fff;
     padding: 1rem 1.5rem;
     margin-bottom: 0.75rem;
@@ -120,60 +124,61 @@ section#expense-list li {
     transition: box-shadow 0.3s ease;
 }
 
-section#expense-list li:hover {
+section#expense-list li.expense-item:hover {
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-span.description {
+section#expense-list span.expense-description {
     flex-grow: 1;
     margin-right: 1rem;
     font-size: 1.1rem;
 }
 
-span.amount {
+section#expense-list span.expense-amount {
     font-weight: bold;
     color: #333;
-    min-width: 80px; /* Ensure amounts align nicely */
+    min-width: 80px; 
     text-align: right;
     font-size: 1.1rem;
 }
 
 /* Delete Button */
-form.delete-form {
+section#expense-list form.delete-form {
     display: inline;
     margin-left: 1rem;
 }
 
-button.delete-button {
-    background-color: #f44336; /* Red for delete */
+button.btn-delete {
+    background-color: #f44336;
     color: white;
     border: none;
     padding: 0.5rem 0.8rem;
     border-radius: 4px;
     cursor: pointer;
     font-size: 0.9rem;
+    font-family: 'Roboto', Arial, sans-serif;
     transition: background-color 0.3s ease, transform 0.2s ease;
     display: inline-flex;
     align-items: center;
-    gap: 0.3rem;
+    gap: 0.3rem; /* Space for icon */
 }
 
-button.delete-button .material-icons {
-    font-size: 1.1rem; /* Icon size */
+button.btn-delete .material-icons {
+    font-size: 1.1rem;
 }
 
-button.delete-button:hover {
+button.btn-delete:hover {
     background-color: #e53935;
     transform: translateY(-1px);
 }
 
 /* Total Expenses */
-p#total-expenses {
+.total-expenses h3 {
     font-size: 1.5rem;
     font-weight: bold;
     color: #4CAF50;
     text-align: right;
-    margin-top: 2rem;
+    margin: 2rem 0 0 0; /* Adjusted margin */
     padding-top: 1rem;
     border-top: 2px dashed #ddd;
 }
@@ -184,55 +189,72 @@ footer {
     padding: 1.5rem;
     background-color: #333333;
     color: #F5F5F5;
-    margin-top: auto; /* Pushes footer to the bottom */
+    margin-top: auto;
 }
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
-    header h1 {
-        font-size: 2rem;
+    .container {
+        margin: 0;
+        padding: 1rem;
+        border-radius: 0;
+        box-shadow: none; /* Remove shadow on mobile for edge-to-edge design */
+        width: 100%;
+        max-width: 100%;
+        margin-top:0; /* Ensure no top margin from original .container style */
+        margin-bottom:0; /* Ensure no bottom margin from original .container style */
+        border-radius: 0; /* No rounded corners on mobile */
+    }
+    body {
+        /* ensure body has no padding if container is edge-to-edge */
     }
 
-    main {
-        margin: 1rem;
-        padding: 1.5rem;
+    header {
+        padding: 1rem 1.5rem;
+    }
+
+    header h1 {
+        font-size: 2rem;
     }
 
     form#add-expense-form {
         padding: 1rem;
     }
 
-    form button[type="submit"] {
+    form#add-expense-form button.btn-add {
         width: 100%;
         padding: 0.8rem;
+        justify-content: center;
     }
 
-    section#expense-list li {
+    section#expense-list li.expense-item {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.5rem;
         padding: 1rem;
     }
 
-    span.amount {
+    section#expense-list span.expense-amount {
         text-align: left;
         min-width: auto;
     }
 
-    form.delete-form {
+    section#expense-list form.delete-form {
         margin-left: 0;
         margin-top: 0.5rem;
         width: 100%;
     }
 
-    button.delete-button {
+    button.btn-delete {
         width: 100%;
         justify-content: center;
     }
 
-    p#total-expenses {
+    .total-expenses h3 {
         font-size: 1.3rem;
         text-align: center;
+        margin-top: 1.5rem;
+        padding-top: 0.75rem;
     }
 }
 

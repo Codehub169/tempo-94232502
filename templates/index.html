@@ -16,7 +16,7 @@
 
         <section class="add-expense-section">
             <h2>Add New Expense</h2>
-            <form method="POST" action="{{ url_for('index') }}">
+            <form method="POST" action="{{ url_for('index') }}" id="add-expense-form">
                 <div class="form-group">
                     <label for="description">Description:</label>
                     <input type="text" id="description" name="description" placeholder="e.g., Coffee, Groceries" required>
@@ -29,7 +29,7 @@
             </form>
         </section>
 
-        <section class="expenses-overview">
+        <section class="expenses-overview" id="expense-list">
             <h2>Your Expenses</h2>
             <div class="total-expenses">
                 <h3>Total Spent: <span class="total-amount">${{ '%.2f'|format(total_expenses) }}</span></h3>
@@ -43,7 +43,7 @@
                         <span class="expense-description">{{ expense.description }}</span>
                         <span class="expense-amount">${{ '%.2f'|format(expense.amount) }}</span>
                     </div>
-                    <form method="POST" action="{{ url_for('delete_expense', expense_id=expense.id) }}" style="display: inline;">
+                    <form method="POST" action="{{ url_for('delete_expense', expense_id=expense.id) }}" style="display: inline;" class="delete-form">
                         <button type="submit" class="btn-delete" title="Delete expense">
                             <span class="material-icons">delete_outline</span>
                         </button>
